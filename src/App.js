@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Figure from './components/Figure'
+import './index.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      data: null
+    }
+  }
+
+  componentDidMount() {
+    fetch('https://libraries.io/api/platforms?api_keye0c54bcef123283b9447d6f70d7f30bd')
+      .then(response => response.json())
+      .then(data => this.setState({
+        platforms: data
+      }))
+  }
+
+  render() {
+    const { platforms } = this.state
+    return (
+      <div className="App">
+        {platforms && platforms.map(platform =>
+          <div key={`${platform.name}-wrapper`} className="platform-wrapper" style={platform.color === "#fff" ? {backgroundColor: '#000'} : {backgroundColor: platform.color}}>
+            <h2 key={platform.name} className="title">{platform.name}</h2>
+            <p>More information is available in the following <a href={platform.homepage}>link</a></p>
+            <Figure platforms={platforms}/>
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
 export default App;
