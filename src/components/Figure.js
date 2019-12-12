@@ -3,13 +3,11 @@ import star from '../images/star.svg'
 import '../index.css'
 
 class Figure extends Component {
-  render() {
-    const { platforms } = this.props
+  render() {  
     return (
       <div>
         <figure>
-          <img src={star} alt="Project Count" className="project-count" />
-          <figcaption>{platforms && platforms.map(platform => platform.project_count)}</figcaption>
+          <img src={star} alt="Project Count" className="project-count" />                    
         </figure>
       </div>
     )

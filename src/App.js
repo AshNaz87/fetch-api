@@ -27,7 +27,8 @@ class App extends Component {
           <div key={`${platform.name}-wrapper`} className="platform-wrapper" style={platform.color === "#fff" ? {backgroundColor: '#000'} : {backgroundColor: platform.color}}>
             <h2 key={platform.name} className="title">{platform.name}</h2>
             <p>More information is available in the following <a href={platform.homepage}>link</a></p>
-            <Figure platforms={platforms}/>
+            <Figure key={platform.project_count} />
+            <p style={{margin: '0px 0px 10px'}}>{platform.project_count}</p>
           </div>
         )}
       </div>
